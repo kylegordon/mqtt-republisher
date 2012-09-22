@@ -5,9 +5,12 @@ Some sort of lookup table, as described at http://blog.hekkers.net/2012/09/18/mq
 
 /raw/mode/method/address/data to /location/house/room/parameter
 
+Republish unknown sources into /unknown, which can be acted upon by Nagios
+
 Some examples of source data I have...
 
 /raw/flat.vpn.glasgownet.com/ups/voltage -> /bishopbriggs/gordonhouse/voltage
 /raw/flat.vpn.glasgownet.com/meterpulsecounter/watts -> /bishopbriggs/gordonhouse/watts
 /raw/weather1.vpn.glasgownet.com/weather/outside_temp -> /milngavie/parentshouse/outside_temp
 /raw/weather1.vpn.glasgownet.com/weather/inside_temp -> /milngavie/parentshouse/sunlounge_temp
+/raw/wmlp1000/apci/core_temp -> /mobile/wmlp1000/cpu_temp
