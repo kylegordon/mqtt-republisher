@@ -1,0 +1,1 @@
+A quick python script to accept incoming MQTT payloads under the topic of /raw/, and look them up in a table for republishing under a logical topic name
