@@ -19,7 +19,7 @@ def on_connect(rc):
 #On recipt of a message print it
 def on_message(msg):
 	print "Received", msg.topic, msg.payload
-	print "performing magic"
+	print "performing lookup magic"
 	mqttc.publish("/test/sorted/foo/bar", msg.payload)
 
 #connect to broker
