@@ -1,1 +1,6 @@
 A quick python script to accept incoming MQTT payloads under the topic of /raw/, and look them up in a table for republishing under a logical topic name
+
+TODO
+Some sort of lookup table, as described at http://blog.hekkers.net/2012/09/18/mqtt-about-dumb-sensors-topics-and-clean-code/
+
+/raw/mode/method/address/data to /location/house/room/parameter
