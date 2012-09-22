@@ -3,10 +3,13 @@
 import mosquitto
 import os
 import time
+import csv
 
 MQTT_HOST="localhost"
 MQTT_PORT=1883
 MQTT_TOPIC="/test/raw/#"
+
+mapfile="map.csv"
 
 mypid = os.getpid()
 client_uniq = "Republisher_"+str(mypid)
@@ -21,6 +24,8 @@ def on_message(msg):
 	print "Received", msg.topic, msg.payload
 	print "performing lookup magic"
 	mqttc.publish("/test/sorted/foo/bar", msg.payload)
+
+map=csv.reader(mapfile)
 
 #connect to broker
 mqttc.connect(MQTT_HOST, MQTT_PORT, 60, True)
