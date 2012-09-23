@@ -7,7 +7,7 @@ import csv
 
 MQTT_HOST="localhost"
 MQTT_PORT=1883
-MQTT_TOPIC="/test/raw/#"
+MQTT_TOPIC="/raw/#"
 
 mapfile='map.csv'
 
@@ -27,9 +27,14 @@ def on_connect(rc):
 
 #On recipt of a message print it
 def on_message(msg):
-	print "Received", msg.topic, msg.payload
-	print "performing lookup magic"
-	mqttc.publish("/test/sorted/foo/bar", msg.payload)
+	# print "Received", msg.topic, msg.payload
+	if msg.topic in mydict:
+		## Found an item. Replace it with one from the dictionary
+		# print "Replacing " + msg.topic + " with " + mydict[msg.topic]
+		mqttc.publish(mydict[msg.topic], msg.payload)
+	else:
+		# Recieved something with a /raw/ topic, but it didn't match. Push it out with /unsorted/ prepended
+		mqttc.publish("/unsorted" + msg.topic, msg.payload)
 
 #connect to broker
 mqttc.connect(MQTT_HOST, MQTT_PORT, 60, True)
