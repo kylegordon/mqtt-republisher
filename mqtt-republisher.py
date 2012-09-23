@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+# -*- coding: iso-8859-1 -*-
+
+__author__ = "Kyle Gordon"
+__copyright__ = "Copyright (C) Kyle Gordon"
 
 import mosquitto
 import os
