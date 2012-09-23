@@ -1,11 +1,8 @@
 A quick python script to accept incoming MQTT payloads under the topic of /raw/, and look them up in a table for republishing under a logical topic name
 
-TODO
-Some sort of lookup table, as described at http://blog.hekkers.net/2012/09/18/mqtt-about-dumb-sensors-topics-and-clean-code/
+It stems from a suggestion by Robert at http://blog.hekkers.net/2012/09/18/mqtt-about-dumb-sensors-topics-and-clean-code/ to try and organize disparate sources into one logical hierarchy. 
 
-/raw/mode/method/address/data to /location/house/room/parameter
-
-Republish unknown sources into /unknown, which can be acted upon by Nagios
+Anything that is published under /raw/ but does not match anything in the map gets republished with /unknown/ prepended to the topic.
 
 Some examples of source data I have...
 
