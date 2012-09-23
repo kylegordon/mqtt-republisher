@@ -6,8 +6,8 @@ Anything that is published under /raw/ but does not match anything in the map ge
 
 Some examples of source data I have...
 
-/raw/flat.vpn.glasgownet.com/ups/voltage -> /bishopbriggs/gordonhouse/voltage
-/raw/flat.vpn.glasgownet.com/meterpulsecounter/watts -> /bishopbriggs/gordonhouse/watts
-/raw/weather1.vpn.glasgownet.com/weather/outside_temp -> /milngavie/parentshouse/outside_temp
-/raw/weather1.vpn.glasgownet.com/weather/inside_temp -> /milngavie/parentshouse/sunlounge_temp
+/raw/flat.vpn.glasgownet.com/ups/voltage -> /bishopbriggs/gordonhouse/electricity/voltage
+/raw/flat.vpn.glasgownet.com/meterpulsecounter/watts -> /bishopbriggs/gordonhouse/electricity/watts
+/raw/weather1.vpn.glasgownet.com/weather/outside_temp -> /milngavie/parentshouse/garden/temperature
+/raw/weather1.vpn.glasgownet.com/weather/inside_temp -> /milngavie/parentshouse/sunlounge/temperature
 /raw/wmlp1000/apci/core_temp -> /mobile/wmlp1000/cpu_temp

@@ -1,5 +1,5 @@
-/raw/flat.vpn.glasgownet.com/ups/voltage -> /bishopbriggs/gordonhouse/electricity/voltage
-/raw/flat.vpn.glasgownet.com/meterpulsecounter/watts -> /bishopbriggs/gordonhouse/electricity/watts
-/raw/weather1.vpn.glasgownet.com/weather/outside_temp -> /milngavie/parentshouse/garden/temperature
-/raw/weather1.vpn.glasgownet.com/weather/inside_temp -> /milngavie/parentshouse/sunlounge/temperature
-/raw/wmlp1000/apci/core_temp -> /mobile/wmlp1000/cpu_temp
+/raw/flat.vpn.glasgownet.com/ups/voltage,/bishopbriggs/gordonhouse/electricity/voltage
+/raw/flat.vpn.glasgownet.com/meterpulsecounter/watts,/bishopbriggs/gordonhouse/electricity/watts
+/raw/weather1.vpn.glasgownet.com/weather/outside_temp,/milngavie/parentshouse/garden/temperature
+/raw/weather1.vpn.glasgownet.com/weather/inside_temp,/milngavie/parentshouse/sunlounge/temperature
+/raw/wmlp1000/apci/core_temp,/mobile/wmlp1000/cpu_temp
