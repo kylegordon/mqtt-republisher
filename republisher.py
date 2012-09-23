@@ -31,8 +31,6 @@ def on_message(msg):
 	print "performing lookup magic"
 	mqttc.publish("/test/sorted/foo/bar", msg.payload)
 
-map=csv.reader(open(mapfile, 'rb'), delimiter=',');
-
 #connect to broker
 mqttc.connect(MQTT_HOST, MQTT_PORT, 60, True)
 
