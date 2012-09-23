@@ -15,6 +15,10 @@ mypid = os.getpid()
 client_uniq = "Republisher_"+str(mypid)
 mqttc = mosquitto.Mosquitto(client_uniq)
 
+def cleanup():
+    print "Disconnecting"
+    mqttc.disconnect()
+
 # Turn the mapping file into a dictionary for internal use
 # Valid from Python 2.7.1 onwards
 with open(mapfile, mode='r') as inputfile:
@@ -36,16 +40,23 @@ def on_message(msg):
 		# Recieved something with a /raw/ topic, but it didn't match. Push it out with /unsorted/ prepended
 		mqttc.publish("/unsorted" + msg.topic, msg.payload)
 
-#connect to broker
-mqttc.connect(MQTT_HOST, MQTT_PORT, 60, True)
+try:
+	#connect to broker
+	mqttc.connect(MQTT_HOST, MQTT_PORT, 60, True)
 
-#define the callbacks
-mqttc.on_message = on_message
-mqttc.on_connect = on_connect
+	#define the callbacks
+	mqttc.on_message = on_message
+	mqttc.on_connect = on_connect
 
-mqttc.subscribe(MQTT_TOPIC, 2)
+	mqttc.subscribe(MQTT_TOPIC, 2)
 
-#remain connected and publish
-while mqttc.loop() == 0:
-    pass
+	#remain connected and publish
+	while mqttc.loop() == 0:
+		pass
 
+except (KeyboardInterrupt):
+    print "Keyboard interrupt received."
+    cleanup()
+except (RuntimeError):
+    print "Crashed for some reason."
+    cleanup()
