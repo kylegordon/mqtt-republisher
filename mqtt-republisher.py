@@ -12,8 +12,7 @@ import csv
 MQTT_HOST="localhost"
 MQTT_PORT=1883
 MQTT_TOPIC="/raw/#"
-
-mapfile='map.csv'
+mapfile='/etc/mqtt-republisher/map.csv'
 
 mypid = os.getpid()
 client_uniq = "Republisher_"+str(mypid)
