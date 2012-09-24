@@ -1,3 +1,6 @@
+SUMMARY
+=======
+
 A quick python script to accept incoming MQTT payloads under the topic of /raw/, and look them up in a table for republishing under a logical topic name
 
 It stems from a suggestion by Robert at http://blog.hekkers.net/2012/09/18/mqtt-about-dumb-sensors-topics-and-clean-code/ to try and organize disparate sources into one logical hierarchy. 
@@ -11,3 +14,17 @@ Some examples of source data I have...
 /raw/weather1.vpn.glasgownet.com/weather/outside_temp -> /milngavie/parentshouse/garden/temperature
 /raw/weather1.vpn.glasgownet.com/weather/inside_temp -> /milngavie/parentshouse/sunlounge/temperature
 /raw/wmlp1000/apci/core_temp -> /mobile/wmlp1000/cpu_temp
+
+INSTALL
+=======
+
+mkdir /usr/local/mqtt-republisher/ /etc/mqtt-republisher/
+cp mqtt-republisher.py /usr/local/mqtt-republisher/
+cp mqtt-republisher.init /etc/init.d/
+cp map.csv /etc/mqtt-republisher/
+update-rc.d mqtt-republisher defaults
+cp mqtt-republisher.default /etc/default/
+
+Edit /etc/mqtt-republisher/map.csv to suit, and then
+
+/etc/init.d/mqtt-republisher start
