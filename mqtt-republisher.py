@@ -74,7 +74,15 @@ try:
 
 	#remain connected and publish
 	while mqttc.loop() == 0:
-		pass
+		try:
+			logging.info("Looping")
+			pass
+		except (KeyboardInterrupt):
+			logging.info("Keyboard interrupt received")
+			cleanup()
+		except (RuntimeError):
+			logging.info("Program crashed")
+			cleanup()
 
 except (KeyboardInterrupt):
     logging.info("Keyboard interrupt received")
