@@ -73,4 +73,3 @@ mqttc.subscribe(MQTT_TOPIC, 2)
 #remain connected and publish
 while mqttc.loop() == 0:
 	logging.debug("Looping")
-	pass
