@@ -52,10 +52,8 @@ def on_connect(rc):
 #On recipt of a message print it
 def on_message(msg):
 	logging.debug("Received: " + msg.topic)
-	# print "Received", msg.topic, msg.payload
 	if msg.topic in mydict:
 		## Found an item. Replace it with one from the dictionary
-		# print "Replacing " + msg.topic + " with " + mydict[msg.topic]
 		mqttc.publish(mydict[msg.topic], msg.payload)
 		logging.debug("Republishing: " + msg.topic + " -> " + mydict[msg.topic])
 	else:
