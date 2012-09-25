@@ -16,7 +16,7 @@ MQTT_PORT=1883
 MQTT_TOPIC="/raw/#"
 MAPFILE='/etc/mqtt-republisher/map.csv'
 LOGFILE='/var/log/mqtt-republisher.log'
-DEBUG=1
+DEBUG=0
 
 mypid = os.getpid()
 client_uniq = "Republisher_"+str(mypid)
