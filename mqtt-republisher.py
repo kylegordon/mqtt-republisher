@@ -52,7 +52,7 @@ def on_connect(result_code):
 	 """
 	 Handle connections (or failures) to the broker.
 	 """
-	 ## FIXME - needs fleshing out
+	 ## FIXME - needs fleshing out http://mosquitto.org/documentation/python/
 	 if result_code == 0:
 		  logging.info("Connected to broker")
 	 else:
@@ -66,6 +66,7 @@ def on_disconnect(result_code):
 	 if result_code == 0:
 		  loggin.info("Clean disconnection")
 	 else:
+		  ## FIXME - is this the right way to reconnect?
 		  logging.info("Unexpected disconnection! Trying to connect back in 5 seconds")
 		  sleep 5
 		  mqttc.connect(MQTT_HOST, MQTT_PORT, 60, True)
