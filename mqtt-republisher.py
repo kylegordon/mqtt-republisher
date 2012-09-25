@@ -4,18 +4,19 @@
 __author__ = "Kyle Gordon"
 __copyright__ = "Copyright (C) Kyle Gordon"
 
-import mosquitto
 import os
 import csv
 import logging
 import signal
 
-MQTT_HOST="10.8.0.1"
-MQTT_PORT=1883
-MQTT_TOPIC="/raw/#"
-MAPFILE="/etc/mqtt-republisher/map.csv"
-LOGFILE="/var/log/mqtt-republisher.log"
-DEBUG=0
+import mosquitto
+
+MQTT_HOST = "10.8.0.1"
+MQTT_PORT = 1883
+MQTT_TOPIC = "/raw/#"
+MAPFILE = "/etc/mqtt-republisher/map.csv"
+LOGFILE = "/var/log/mqtt-republisher.log"
+DEBUG = False
 
 mypid = os.getpid()
 client_uniq = "Republisher_"+str(mypid)
