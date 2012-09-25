@@ -18,9 +18,8 @@ MAPFILE = "/etc/mqtt-republisher/map.csv"
 LOGFILE = "/var/log/mqtt-republisher.log"
 DEBUG = False
 
-mypid = os.getpid()
-client_uniq = "Republisher_"+str(mypid)
-mqttc = mosquitto.Mosquitto(client_uniq)
+client_id = "Republisher_%d" % os.getpid()
+mqttc = mosquitto.Mosquitto(client_id)
 
 LEVELS = {'debug': logging.DEBUG,
           'info': logging.INFO,
