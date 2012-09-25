@@ -59,6 +59,17 @@ def on_connect(result_code):
 		  logging.warning("Something went wrong")
 		  cleanup()
 
+def on_disconnect(result_code):
+	 """
+	 Handle disconnections from the broker
+	 """
+	 if result_code == 0:
+		  loggin.info("Clean disconnection")
+	 else:
+		  logging.info("Unexpected disconnection! Trying to connect back in 5 seconds")
+		  sleep 5
+		  mqttc.connect(MQTT_HOST, MQTT_PORT, 60, True)
+
 #On recipt of a message print it
 def on_message(msg):
 	 """
@@ -84,6 +95,7 @@ mqttc.connect(MQTT_HOST, MQTT_PORT, 60, True)
 #define the callbacks
 mqttc.on_message = on_message
 mqttc.on_connect = on_connect
+mqttc.on_disconnect = on_disconnect
 
 mqttc.subscribe(MQTT_TOPIC, 2)
 
