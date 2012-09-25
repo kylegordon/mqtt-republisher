@@ -45,23 +45,34 @@ with open(MAPFILE, mode="r") as inputfile:
 	 Read the named mapfile into a dictionary for internal lookups
 	 """
 	 reader = csv.reader(inputfile)
-    mydict = dict((rows[0],rows[1]) for rows in reader)
+	 mydict = dict((rows[0],rows[1]) for rows in reader)
 
 #define what happens after connection
-def on_connect(rc):
-	logging.info("Connected to broker")
+def on_connect(result_code):
+	 """
+	 Handle connections (or failures) to the broker.
+	 """
+	 ## FIXME - needs fleshing out
+	 if result_code == 0:
+		  logging.info("Connected to broker")
+	 else:
+		  logging.warning("Something went wrong")
+		  cleanup()
 
 #On recipt of a message print it
 def on_message(msg):
-	logging.debug("Received: " + msg.topic)
-	if msg.topic in mydict:
-		## Found an item. Replace it with one from the dictionary
-		mqttc.publish(mydict[msg.topic], msg.payload)
-		logging.debug("Republishing: " + msg.topic + " -> " + mydict[msg.topic])
-	else:
-		# Recieved something with a /raw/ topic, but it didn't match. Push it out with /unsorted/ prepended
-		mqttc.publish("/unsorted" + msg.topic, msg.payload)
-		logging.debug("Unknown: " + msg.topic)
+	 """
+	 What to do when the client recieves a message from the broker
+	 """
+	 logging.debug("Recieved: " + msg.topic)
+	 if msg.topic in mydict:
+		  ## Found an item. Replace it with one from the dictionary
+		  mqttc.publish(mydict[msg.topic], msg.payload)
+		  logging.debug("Republishing: " + msg.topic + " -> " + mydict[msg.topic])
+	 else:
+		  # Recieved something with a /raw/ topic, but it didn't match. Push it out with /unsorted/ prepended
+		  mqttc.publish("/unsorted" + msg.topic, msg.payload)
+		  logging.debug("Unknown: " + msg.topic)
 
 # Use the signal module to handle signals
 signal.signal(signal.SIGTERM, cleanup)
