@@ -13,8 +13,8 @@ import signal
 MQTT_HOST="10.8.0.1"
 MQTT_PORT=1883
 MQTT_TOPIC="/raw/#"
-MAPFILE='/etc/mqtt-republisher/map.csv'
-LOGFILE='/var/log/mqtt-republisher.log'
+MAPFILE="/etc/mqtt-republisher/map.csv"
+LOGFILE="/var/log/mqtt-republisher.log"
 DEBUG=0
 
 mypid = os.getpid()
@@ -30,9 +30,9 @@ LEVELS = {'debug': logging.DEBUG,
 if DEBUG == 0: logging.basicConfig(filename=LOGFILE,level=logging.INFO)
 if DEBUG == 1: logging.basicConfig(filename=LOGFILE,level=logging.DEBUG)
 
-logging.info('Starting mqtt-republisher')
-logging.info('INFO MODE')
-logging.debug('DEBUG MODE')
+logging.info("Starting mqtt-republisher")
+logging.info("INFO MODE")
+logging.debug("DEBUG MODE")
 
 def cleanup(signum, frame):
     logging.info("Disconnecting from broker")
@@ -41,7 +41,7 @@ def cleanup(signum, frame):
 
 # Turn the mapping file into a dictionary for internal use
 # Valid from Python 2.7.1 onwards
-with open(MAPFILE, mode='r') as inputfile:
+with open(MAPFILE, mode="r") as inputfile:
     reader = csv.reader(inputfile)
     mydict = dict((rows[0],rows[1]) for rows in reader)
 
