@@ -21,7 +21,6 @@ INSTALL
 mkdir /usr/local/mqtt-republisher/ /etc/mqtt-republisher/
 cd /usr/local/
 git clone git://github.com/kylegordon/mqtt-republisher.git
-cp mqtt-republisher.py /usr/local/mqtt-republisher/
 cp mqtt-republisher.init /etc/init.d/mqtt-republisher
 cp map.csv /etc/mqtt-republisher/
 update-rc.d mqtt-republisher defaults
