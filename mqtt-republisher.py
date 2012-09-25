@@ -9,8 +9,9 @@ import os
 import time
 import csv
 import logging
+import signal
 
-MQTT_HOST="localhost"
+MQTT_HOST="10.8.0.1"
 MQTT_PORT=1883
 MQTT_TOPIC="/raw/#"
 MAPFILE='/etc/mqtt-republisher/map.csv'
@@ -34,9 +35,10 @@ logging.info('Starting mqtt-republisher')
 logging.info('INFO MODE')
 logging.debug('DEBUG MODE')
 
-def cleanup():
+def cleanup(signum, frame):
     logging.info("Disconnecting from broker")
     mqttc.disconnect()
+    logging.info("Exiting on signal " + str(signum))
 
 # Turn the mapping file into a dictionary for internal use
 # Valid from Python 2.7.1 onwards
@@ -62,31 +64,20 @@ def on_message(msg):
 		mqttc.publish("/unsorted" + msg.topic, msg.payload)
 		logging.debug("Unknown: " + msg.topic)
 
-try:
-	#connect to broker
-	mqttc.connect(MQTT_HOST, MQTT_PORT, 60, True)
+# Use the signal module to handle signals
+signal.signal(signal.SIGTERM, cleanup)
+signal.signal(signal.SIGINT, cleanup)
 
-	#define the callbacks
-	mqttc.on_message = on_message
-	mqttc.on_connect = on_connect
+#connect to broker
+mqttc.connect(MQTT_HOST, MQTT_PORT, 60, True)
 
-	mqttc.subscribe(MQTT_TOPIC, 2)
+#define the callbacks
+mqttc.on_message = on_message
+mqttc.on_connect = on_connect
 
-	#remain connected and publish
-	while mqttc.loop() == 0:
-		try:
-			logging.debug("Looping")
-			pass
-		except (KeyboardInterrupt):
-			logging.info("Keyboard interrupt received")
-			cleanup()
-		except (RuntimeError):
-			logging.info("Program crashed")
-			cleanup()
+mqttc.subscribe(MQTT_TOPIC, 2)
 
-except (KeyboardInterrupt):
-    logging.info("Keyboard interrupt received")
-    cleanup()
-except (RuntimeError):
-    logging.info("Program crashed")
-    cleanup()
+#remain connected and publish
+while mqttc.loop() == 0:
+	logging.debug("Looping")
+	pass
