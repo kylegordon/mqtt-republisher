@@ -31,9 +31,13 @@ logging.info("INFO MODE")
 logging.debug("DEBUG MODE")
 
 def cleanup(signum, frame):
+	 """
+	 Signal handler to ensure we disconnect cleanly in the event of a
+	 SIGTERM or SIGNINT.
+	 """
     logging.info("Disconnecting from broker")
     mqttc.disconnect()
-    logging.info("Exiting on signal " + str(signum))
+    logging.info("Exiting on signal %d", signum)
 
 # Turn the mapping file into a dictionary for internal use
 # Valid from Python 2.7.1 onwards
