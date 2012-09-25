@@ -8,6 +8,7 @@ import os
 import csv
 import logging
 import signal
+import time
 
 import mosquitto
 
@@ -68,7 +69,7 @@ def on_disconnect(result_code):
 	 else:
 		  ## FIXME - is this the right way to reconnect?
 		  logging.info("Unexpected disconnection! Trying to connect back in 5 seconds")
-		  sleep 5
+		  time.sleep(5)
 		  mqttc.connect(MQTT_HOST, MQTT_PORT, 60, True)
 
 #On recipt of a message print it
