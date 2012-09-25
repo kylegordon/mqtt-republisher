@@ -23,7 +23,7 @@ mqttc = mosquitto.Mosquitto(client_id)
 
 if DEBUG:
     logging.basicConfig(filename=LOGFILE, level=logging.INFO)
-else
+else:
 	 logging.basicConfig(filename=LOGFILE, level=logging.DEBUG)
 
 logging.info("Starting mqtt-republisher")
@@ -32,17 +32,19 @@ logging.debug("DEBUG MODE")
 
 def cleanup(signum, frame):
 	 """
-	 Signal handler to ensure we disconnect cleanly in the event of a
-	 SIGTERM or SIGNINT.
+	 Signal handler to ensure we disconnect cleanly 
+	 in the event of a SIGTERM or SIGINT.
 	 """
-    logging.info("Disconnecting from broker")
-    mqttc.disconnect()
-    logging.info("Exiting on signal %d", signum)
+	 logging.info("Disconnecting from broker")
+	 mqttc.disconnect()
+	 logging.info("Exiting on signal %d", signum)
 
 # Turn the mapping file into a dictionary for internal use
-# Valid from Python 2.7.1 onwards
 with open(MAPFILE, mode="r") as inputfile:
-    reader = csv.reader(inputfile)
+	 """
+	 Read the named mapfile into a dictionary for internal lookups
+	 """
+	 reader = csv.reader(inputfile)
     mydict = dict((rows[0],rows[1]) for rows in reader)
 
 #define what happens after connection
