@@ -21,12 +21,6 @@ DEBUG = False
 client_id = "Republisher_%d" % os.getpid()
 mqttc = mosquitto.Mosquitto(client_id)
 
-LEVELS = {'debug': logging.DEBUG,
-          'info': logging.INFO,
-          'warning': logging.WARNING,
-          'error': logging.ERROR,
-          'critical': logging.CRITICAL}
-
 if DEBUG == 0: logging.basicConfig(filename=LOGFILE,level=logging.INFO)
 if DEBUG == 1: logging.basicConfig(filename=LOGFILE,level=logging.DEBUG)
 
