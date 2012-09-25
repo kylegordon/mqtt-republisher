@@ -21,8 +21,10 @@ DEBUG = False
 client_id = "Republisher_%d" % os.getpid()
 mqttc = mosquitto.Mosquitto(client_id)
 
-if DEBUG == 0: logging.basicConfig(filename=LOGFILE,level=logging.INFO)
-if DEBUG == 1: logging.basicConfig(filename=LOGFILE,level=logging.DEBUG)
+if DEBUG:
+    logging.basicConfig(filename=LOGFILE, level=logging.INFO)
+else
+	 logging.basicConfig(filename=LOGFILE, level=logging.DEBUG)
 
 logging.info("Starting mqtt-republisher")
 logging.info("INFO MODE")
