@@ -6,7 +6,6 @@ __copyright__ = "Copyright (C) Kyle Gordon"
 
 import mosquitto
 import os
-import time
 import csv
 import logging
 import signal
