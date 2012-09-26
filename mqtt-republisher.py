@@ -65,7 +65,7 @@ def on_disconnect(result_code):
 	 Handle disconnections from the broker
 	 """
 	 if result_code == 0:
-		  loggin.info("Clean disconnection")
+		  logging.info("Clean disconnection")
 	 else:
 		  ## FIXME - is this the right way to reconnect?
 		  logging.info("Unexpected disconnection! Trying to connect back in 5 seconds")
