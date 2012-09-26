@@ -42,14 +42,6 @@ def cleanup(signum, frame):
 	 mqttc.disconnect()
 	 logging.info("Exiting on signal %d", signum)
 
-# Turn the mapping file into a dictionary for internal use
-with open(MAPFILE, mode="r") as inputfile:
-	 """
-	 Read the named mapfile into a dictionary for internal lookups
-	 """
-	 reader = csv.reader(inputfile)
-	 mydict = dict((rows[0],rows[1]) for rows in reader)
-
 #define what happens after connection
 def on_connect(result_code):
 	 """
@@ -77,16 +69,24 @@ def on_disconnect(result_code):
 		  time.sleep(5)
 		  mqttc.connect(MQTT_HOST, MQTT_PORT, 60, True)
 
+class Republishingmap:
+        """
+        Read the named mapfile into a dictionary for internal lookups
+        """
+        with open(MAPFILE, mode="r") as inputfile:
+                reader = csv.reader(inputfile)
+                mapdict = dict((rows[0],rows[1]) for rows in reader)
+
 #On recipt of a message print it
 def on_message(msg):
 	"""
 	What to do when the client recieves a message from the broker
 	"""
 	logging.debug("Received: %s", msg.topic)
-	if msg.topic in mydict:
+	if msg.topic in Republishingmap.mapdict:
 		## Found an item. Replace it with one from the dictionary
-		mqttc.publish(mydict[msg.topic], msg.payload)
-		logging.debug("Republishing: %s -> %s", msg.topic, mydict[msg.topic])
+		mqttc.publish(Republishingmap.mapdict[msg.topic], msg.payload)
+		logging.debug("Republishing: %s -> %s", msg.topic, Republishingmap.mapdict[msg.topic])
 	else:
 		# Received something with a /raw/ topic, but it didn't match. Push it out with /unsorted/ prepended
 		mqttc.publish("/unsorted" + msg.topic, msg.payload)
