@@ -79,15 +79,15 @@ def on_message(msg):
 	 """
 	 What to do when the client recieves a message from the broker
 	 """
-	 logging.debug("Recieved: " + msg.topic)
-	 if msg.topic in mydict:
-		  ## Found an item. Replace it with one from the dictionary
-		  mqttc.publish(mydict[msg.topic], msg.payload)
-		  logging.debug("Republishing: " + msg.topic + " -> " + mydict[msg.topic])
-	 else:
-		  # Recieved something with a /raw/ topic, but it didn't match. Push it out with /unsorted/ prepended
-		  mqttc.publish("/unsorted" + msg.topic, msg.payload)
-		  logging.debug("Unknown: " + msg.topic)
+	logging.debug("Received: %s", msg.topic)
+	if msg.topic in mydict:
+		## Found an item. Replace it with one from the dictionary
+		mqttc.publish(mydict[msg.topic], msg.payload)
+		logging.debug("Republishing: %s -> %s", msg.topic, mydict[msg.topic])
+	else:
+		# Received something with a /raw/ topic, but it didn't match. Push it out with /unsorted/ prepended
+		mqttc.publish("/unsorted" + msg.topic, msg.payload)
+		logging.debug("Unknown: %s", msg.topic)
 
 # Use the signal module to handle signals
 signal.signal(signal.SIGTERM, cleanup)
