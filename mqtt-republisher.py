@@ -1,6 +1,6 @@
-# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 
 __author__ = "Kyle Gordon"
 __copyright__ = "Copyright (C) Kyle Gordon"
