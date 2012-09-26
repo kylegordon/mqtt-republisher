@@ -76,9 +76,9 @@ def on_disconnect(result_code):
 
 #On recipt of a message print it
 def on_message(msg):
-	 """
-	 What to do when the client recieves a message from the broker
-	 """
+	"""
+	What to do when the client recieves a message from the broker
+	"""
 	logging.debug("Received: %s", msg.topic)
 	if msg.topic in mydict:
 		## Found an item. Replace it with one from the dictionary
