@@ -37,6 +37,7 @@ def cleanup(signum, frame):
 	 in the event of a SIGTERM or SIGINT.
 	 """
 	 logging.info("Disconnecting from broker")
+	 mqttc.publish("/status" + socket.fqdn(), "Offline")
 	 mqttc.disconnect()
 	 logging.info("Exiting on signal %d", signum)
 
