@@ -38,7 +38,7 @@ def cleanup(signum, frame):
 	 in the event of a SIGTERM or SIGINT.
 	 """
 	 logging.info("Disconnecting from broker")
-	 mqttc.publish("/status/" + socket.getfqdn, "Offline")
+	 mqttc.publish("/status/" + socket.getfqdn(), "Offline")
 	 mqttc.disconnect()
 	 logging.info("Exiting on signal %d", signum)
 
@@ -58,7 +58,7 @@ def on_connect(result_code):
 	 ## FIXME - needs fleshing out http://mosquitto.org/documentation/python/
 	 if result_code == 0:
 		logging.info("Connected to broker")
-		mqttc.publish("/status/" + socket.getfqdn, "Online")
+		mqttc.publish("/status/" + socket.getfqdn(), "Online")
 	 else:
 		logging.warning("Something went wrong")
 		cleanup()
