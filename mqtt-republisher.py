@@ -71,7 +71,9 @@ def on_disconnect(result_code):
 		  logging.info("Clean disconnection")
 	 else:
 		  ## FIXME - is this the right way to reconnect?
+		  ## No, as it doesn't work. 
 		  logging.info("Unexpected disconnection! Trying to connect back in 5 seconds")
+		  logging.debug("Result code: %s", result_code)
 		  time.sleep(5)
 		  mqttc.connect(MQTT_HOST, MQTT_PORT, 60, True)
 
