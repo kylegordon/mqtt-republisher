@@ -56,10 +56,11 @@ def on_connect(result_code):
 	 """
 	 ## FIXME - needs fleshing out http://mosquitto.org/documentation/python/
 	 if result_code == 0:
-		  logging.info("Connected to broker")
+		logging.info("Connected to broker")
+		mqttc.publish("/status" + socket.fqdn(), "Online")
 	 else:
-		  logging.warning("Something went wrong")
-		  cleanup()
+		logging.warning("Something went wrong")
+		cleanup()
 
 def on_disconnect(result_code):
 	 """
