@@ -1,3 +1,4 @@
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 
@@ -60,22 +61,22 @@ def on_disconnect(result_code):
 	 Handle disconnections from the broker
 	 """
 	 if result_code == 0:
-		  logging.info("Clean disconnection")
+		logging.info("Clean disconnection")
 	 else:
-		  ## FIXME - is this the right way to reconnect?
-		  ## No, as it doesn't work. 
-		  logging.info("Unexpected disconnection! Trying to connect back in 5 seconds")
-		  logging.debug("Result code: %s", result_code)
-		  time.sleep(5)
-		  mqttc.connect(MQTT_HOST, MQTT_PORT, 60, True)
+		## FIXME - is this the right way to reconnect?
+		## No, as it doesn't work. 
+		logging.info("Unexpected disconnection! Trying to connect back in 5 seconds")
+		logging.debug("Result code: %s", result_code)
+		time.sleep(5)
+		mqttc.connect(MQTT_HOST, MQTT_PORT, 60, True)
 
 class Republishingmap:
-        """
-        Read the named mapfile into a dictionary for internal lookups
-        """
-        with open(MAPFILE, mode="r") as inputfile:
-                reader = csv.reader(inputfile)
-                mapdict = dict((rows[0],rows[1]) for rows in reader)
+	"""
+	Read the named mapfile into a dictionary for internal lookups
+	"""
+	with open(MAPFILE, mode="r") as inputfile:
+		reader = csv.reader(inputfile)
+		mapdict = dict((rows[0],rows[1]) for rows in reader)
 
 #On recipt of a message print it
 def on_message(msg):
