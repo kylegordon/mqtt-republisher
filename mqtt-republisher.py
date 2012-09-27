@@ -43,6 +43,17 @@ def cleanup(signum, frame):
 	 mqttc.disconnect()
 	 logging.info("Exiting on signal %d", signum)
 
+def connect():
+    #connect to broker
+    mqttc.connect(MQTT_HOST, MQTT_PORT, 60, True)
+
+    #define the callbacks
+    mqttc.on_message = on_message
+    mqttc.on_connect = on_connect
+    mqttc.on_disconnect = on_disconnect
+
+    mqttc.subscribe(MQTT_TOPIC, 2)
+
 #define what happens after connection
 def on_connect(result_code):
 	 """
@@ -98,14 +109,7 @@ signal.signal(signal.SIGTERM, cleanup)
 signal.signal(signal.SIGINT, cleanup)
 
 #connect to broker
-mqttc.connect(MQTT_HOST, MQTT_PORT, 60, True)
-
-#define the callbacks
-mqttc.on_message = on_message
-mqttc.on_connect = on_connect
-mqttc.on_disconnect = on_disconnect
-
-mqttc.subscribe(MQTT_TOPIC, 2)
+connect()
 
 #remain connected and publish
 while mqttc.loop() == 0:
