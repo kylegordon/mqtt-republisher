@@ -74,8 +74,6 @@ def on_disconnect(result_code):
      if result_code == 0:
         logging.info("Clean disconnection")
      else:
-        ## FIXME - is this the right way to reconnect?
-        ## No, as it doesn't work. 
         logging.info("Unexpected disconnection! Reconnecting in 5 seconds")
         logging.debug("Result code: %s", result_code)
         time.sleep(5)
