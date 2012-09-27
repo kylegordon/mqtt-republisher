@@ -70,7 +70,7 @@ def on_disconnect(result_code):
 		time.sleep(5)
 		mqttc.connect(MQTT_HOST, MQTT_PORT, 60, True)
 
-class Republishingmap:
+class RepublishingMap:
 	"""
 	Read the named mapfile into a dictionary for internal lookups
 	"""
@@ -84,10 +84,10 @@ def on_message(msg):
 	What to do when the client recieves a message from the broker
 	"""
 	logging.debug("Received: %s", msg.topic)
-	if msg.topic in Republishingmap.mapdict:
+	if msg.topic in RepublishingMap.mapdict:
 		## Found an item. Replace it with one from the dictionary
-		mqttc.publish(Republishingmap.mapdict[msg.topic], msg.payload)
-		logging.debug("Republishing: %s -> %s", msg.topic, Republishingmap.mapdict[msg.topic])
+		mqttc.publish(RepublishingMap.mapdict[msg.topic], msg.payload)
+		logging.debug("Republishing: %s -> %s", msg.topic, RepublishingMap.mapdict[msg.topic])
 	else:
 		# Received something with a /raw/ topic, but it didn't match. Push it out with /unsorted/ prepended
 		mqttc.publish("/unsorted" + msg.topic, msg.payload)
