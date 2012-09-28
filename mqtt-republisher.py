@@ -105,11 +105,11 @@ def on_message(msg):
     if msg.topic in RepublishingMap.mapdict:
         ## Found an item. Replace it with one from the dictionary
         mqttc.publish(RepublishingMap.mapdict[msg.topic], msg.payload)
-        logging.debug("Republishing: %s -> %s", msg.topic, RepublishingMap.mapdict[msg.topic])
+        logging.info("Republishing: %s -> %s", msg.topic, RepublishingMap.mapdict[msg.topic])
     else:
         # Received something with a /raw/ topic, but it didn't match. Push it out with /unsorted/ prepended
         mqttc.publish("/unsorted" + msg.topic, msg.payload)
-        logging.debug("Unknown: %s", msg.topic)
+        logging.info("Unknown: %s", msg.topic)
 
 def main_loop():
         """
