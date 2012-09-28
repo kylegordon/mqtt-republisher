@@ -23,9 +23,10 @@ cd /usr/local/
 git clone git://github.com/kylegordon/mqtt-republisher.git
 cp mqtt-republisher.init /etc/init.d/mqtt-republisher
 cp map.csv /etc/mqtt-republisher/
+cp mqtt-republisher.cfg.example /etc/mqtt-republisher/mqtt-republisher.cfg
 update-rc.d mqtt-republisher defaults
 cp mqtt-republisher.default /etc/default/mqtt-republisher
 
-Edit /etc/mqtt-republisher/map.csv to suit, and then
+Edit /etc/mqtt-republisher/map.csv and /etc/mqtt-republisher/mqtt-republisher.cfg to suit, and then
 
 /etc/init.d/mqtt-republisher start
