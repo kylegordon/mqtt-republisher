@@ -13,13 +13,19 @@ import time
 import socket
 
 import mosquitto
+import ConfigParser
 
-MQTT_HOST = "10.8.0.1"
-MQTT_PORT = 1883
-MQTT_TOPIC = "/raw/#"
-MAPFILE = "/etc/mqtt-republisher/map.csv"
-LOGFILE = "/var/log/mqtt-republisher.log"
-DEBUG = False
+# Read the config file
+config = ConfigParser.RawConfigParser()
+config.read('/etc/mqtt-republisher/mqtt-republisher.cfg')
+
+#Use ConfigParser to pick out the settings
+DEBUG = config.getboolean('global', 'debug')
+LOGFILE = config.get('global', 'logfile')
+MAPFILE = config.get('global', 'mapfile')
+MQTT_HOST = config.get('global', 'mqtt_host')
+MQTT_PORT = config.get('global', 'mqtt_host')
+MQTT_PORT = config.get('global', 'mqtt_host')
 
 client_id = "Republisher_%d" % os.getpid()
 mqttc = mosquitto.Mosquitto(client_id)
