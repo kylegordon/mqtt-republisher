@@ -49,7 +49,9 @@ def cleanup(signum, frame):
      logging.info("Exiting on signal %d", signum)
 
 def connect():
-    #connect to broker
+    """
+    Connect to the broker, define the callbacks, and subscribe
+    """
     mqttc.connect(MQTT_HOST, MQTT_PORT, 60, True)
 
     #define the callbacks
