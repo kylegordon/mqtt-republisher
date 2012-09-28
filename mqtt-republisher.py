@@ -15,13 +15,12 @@ import socket
 import mosquitto
 import ConfigParser
 
-DEBUG = false
-
 # Read the config file
 config = ConfigParser.RawConfigParser()
 config.read("/etc/mqtt-republisher/mqtt-republisher.cfg")
 
 #Use ConfigParser to pick out the settings
+DEBUG = config.getboolean("global", "debug")
 LOGFILE = config.get("global", "logfile")
 MAPFILE = config.get("global", "mapfile")
 MQTT_HOST = config.get("global", "mqtt_host")
@@ -32,9 +31,9 @@ client_id = "Republisher_%d" % os.getpid()
 mqttc = mosquitto.Mosquitto(client_id)
 
 if DEBUG:
-    logging.basicConfig(filename=LOGFILE, level=logging.INFO)
-else:
     logging.basicConfig(filename=LOGFILE, level=logging.DEBUG)
+else:
+    logging.basicConfig(filename=LOGFILE, level=logging.INFO)
 
 logging.info("Starting mqtt-republisher")
 logging.info("INFO MODE")

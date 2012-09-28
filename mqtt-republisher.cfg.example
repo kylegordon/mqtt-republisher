@@ -1,4 +1,5 @@
 [global]
+DEBUG = False
 LOGFILE = /var/log/mqtt-republisher.log
 MAPFILE = /etc/mqtt-republisher/map.csv
 MQTT_HOST = 10.8.0.1
