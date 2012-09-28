@@ -61,7 +61,6 @@ def connect():
 
     mqttc.subscribe(MQTT_TOPIC, 2)
 
-#define what happens after connection
 def on_connect(result_code):
      """
      Handle connections (or failures) to the broker.
