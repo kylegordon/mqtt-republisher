@@ -24,7 +24,7 @@ DEBUG = config.getboolean("global", "debug")
 LOGFILE = config.get("global", "logfile")
 MAPFILE = config.get("global", "mapfile")
 MQTT_HOST = config.get("global", "mqtt_host")
-MQTT_PORT = config.get("global", "mqtt_host")
+MQTT_PORT = config.get("global", "mqtt_port")
 
 client_id = "Republisher_%d" % os.getpid()
 mqttc = mosquitto.Mosquitto(client_id)
