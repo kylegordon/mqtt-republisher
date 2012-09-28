@@ -1,6 +1,6 @@
 [global]
 DEBUG = True
-logfile = /var/log/mqtt-republisher.log
+LOGFILE = /var/log/mqtt-republisher.log
 MAPFILE = /etc/mqtt-republisher/map.csv
 MQTT_HOST = 10.8.0.1
 MQTT_PORT = 1883
