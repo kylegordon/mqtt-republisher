@@ -30,10 +30,12 @@ MQTT_TOPIC = config.get("global", "mqtt_topic")
 client_id = "Republisher_%d" % os.getpid()
 mqttc = mosquitto.Mosquitto(client_id)
 
+LOGFORMAT = '%(asctime)-15s %(message)s'
+
 if DEBUG:
-    logging.basicConfig(filename=LOGFILE, level=logging.DEBUG)
+    logging.basicConfig(filename=LOGFILE, level=logging.DEBUG, format=LOGFORMAT)
 else:
-    logging.basicConfig(filename=LOGFILE, level=logging.INFO)
+    logging.basicConfig(filename=LOGFILE, level=logging.INFO, format=LOGFORMAT)
 
 logging.info("Starting mqtt-republisher")
 logging.info("INFO MODE")
