@@ -50,12 +50,17 @@ def cleanup(signum, frame):
      mqttc.publish("/status/" + socket.getfqdn(), "Offline")
      mqttc.disconnect()
      logging.info("Exiting on signal %d", signum)
+     sys.exit(signum)
 
 def connect():
     """
     Connect to the broker, define the callbacks, and subscribe
     """
-    mqttc.connect(MQTT_HOST, MQTT_PORT, 60, True)
+    result = mqttc.connect(MQTT_HOST, MQTT_PORT, 60, True)
+    if result != 0:
+        logging.info("Connection failed with error code %s. Retrying", result)
+        time.sleep(10)
+        connect()
 
     #define the callbacks
     mqttc.on_message = on_message
