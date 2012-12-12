@@ -11,6 +11,7 @@ import logging
 import signal
 import time
 import socket
+import sys
 
 import mosquitto
 import ConfigParser
