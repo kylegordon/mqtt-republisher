@@ -70,7 +70,7 @@ def connect():
 
     mqttc.subscribe(MQTT_TOPIC, 2)
 
-def on_connect(result_code):
+def on_connect(mosq, obj, result_code):
      """
      Handle connections (or failures) to the broker.
      """
@@ -82,7 +82,7 @@ def on_connect(result_code):
         logging.warning("Something went wrong")
         cleanup()
 
-def on_disconnect(result_code):
+def on_disconnect(mosq, obj, result_code):
      """
      Handle disconnections from the broker
      """
@@ -103,8 +103,7 @@ class RepublishingMap:
         reader = csv.reader(inputfile)
         mapdict = dict((rows[0],rows[1]) for rows in reader)
 
-#On recipt of a message print it
-def on_message(msg):
+def on_message(mosq, obj, msg):
     """
     What to do when the client recieves a message from the broker
     """
