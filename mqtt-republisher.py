@@ -185,8 +185,6 @@ def connect():
     if DEBUG:
         mqttc.on_log = on_log
 
-    mqttc.subscribe(MQTT_TOPIC, 2)
-
 
 class RepublishingMap:
     """
