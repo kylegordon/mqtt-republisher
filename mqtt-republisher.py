@@ -44,7 +44,7 @@ else:
                         level=logging.INFO,
                         format=LOGFORMAT)
 
-logging.info("Starting mqtt-republisher")
+logging.info("Starting " + APPNAME)
 logging.info("INFO MODE")
 logging.debug("DEBUG MODE")
 
