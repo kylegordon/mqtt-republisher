@@ -30,7 +30,7 @@ MQTT_TOPIC = config.get("global", "mqtt_topic")
 
 APPNAME = "mqtt-republisher"
 PRESENCETOPIC = "clients/" + socket.getfqdn() + "/" + APPNAME + "/state"
-client_id = "Republisher_%d" % os.getpid()
+client_id = APPNAME + "_%d" % os.getpid()
 mqttc = mosquitto.Mosquitto(client_id)
 
 LOGFORMAT = '%(asctime)-15s %(message)s'
