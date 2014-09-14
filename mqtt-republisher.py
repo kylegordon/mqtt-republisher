@@ -15,6 +15,7 @@ import sys
 
 import mosquitto
 import ConfigParser
+import setproctitle
 
 # Read the config file
 config = ConfigParser.RawConfigParser()
@@ -30,6 +31,7 @@ MQTT_TOPIC = config.get("global", "mqtt_topic")
 
 APPNAME = "mqtt-republisher"
 PRESENCETOPIC = "clients/" + socket.getfqdn() + "/" + APPNAME + "/state"
+setproctitle.setproctitle(APPNAME)
 client_id = APPNAME + "_%d" % os.getpid()
 mqttc = mosquitto.Mosquitto(client_id)
 
